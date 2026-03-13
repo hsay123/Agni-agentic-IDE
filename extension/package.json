@@ -1,0 +1,96 @@
+{
+  "name": "agni-ide",
+  "displayName": "Agni IDE",
+  "description": "India's first agentic IDE — powered by local Ollama",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agni.openChat",
+        "title": "Agni: Open Chat"
+      },
+      {
+        "command": "agni.runAgent",
+        "title": "Agni: Run Agent on Selection"
+      },
+      {
+        "command": "agni.indexWorkspace",
+        "title": "Agni: Index Workspace"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "agni.openChat",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agni-sidebar",
+          "title": "Agni IDE",
+          "icon": "$(flame)"
+        }
+      ]
+    },
+    "views": {
+      "agni-sidebar": [
+        {
+          "type": "webview",
+          "id": "agni.chatView",
+          "name": "Agni Chat"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Agni IDE",
+      "properties": {
+        "agni.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "Ollama server URL"
+        },
+        "agni.model": {
+          "type": "string",
+          "default": "qwen2.5-coder:7b",
+          "description": "Ollama model to use"
+        },
+        "agni.maxRetries": {
+          "type": "number",
+          "default": 3,
+          "description": "Max self-correction retries"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.27.4",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "ollama": "^0.5.0"
+  },
+  "publisher": "agni-ide",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agni-ide/agni"
+  }
+}
